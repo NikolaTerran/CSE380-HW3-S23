@@ -2,6 +2,8 @@ import { PlayerStates, PlayerAnimations } from "../PlayerController";
 import PlayerState from "./PlayerState";
 import Input from "../../../Wolfie2D/Input/Input";
 import { HW3Controls } from "../../HW3Controls";
+import { HW3Events } from "../../HW3Events";
+import GameEvent from "../../../Wolfie2D/Events/GameEvent";
 
 export default class Idle extends PlayerState {
 
@@ -15,14 +17,16 @@ export default class Idle extends PlayerState {
 	public update(deltaT: number): void {
         // Adjust the direction the player is facing
 		super.update(deltaT);
-
         // Get the direction of the player's movement
 		let dir = this.parent.inputDir;
 
         // If the player is moving along the x-axis, transition to the walking state
-		if (!dir.isZero() && dir.y === 0){
-			this.finished(PlayerStates.WALK);
-		} 
+        if (Input.isPressed(HW3Controls.ATTACK)){
+            this.finished(PlayerStates.ATTACKING_RIGHT);
+        }
+		else if (!(dir.x === 0) && dir.y === 0){
+			this.finished(PlayerStates.RUNNING_RIGHT);
+		}
         // If the player is jumping, transition to the jumping state
         else if (Input.isJustPressed(HW3Controls.JUMP)) {
             this.finished(PlayerStates.JUMP);

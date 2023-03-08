@@ -1,0 +1,337 @@
+{
+	"name": "doge",
+	"spriteSheetImage": "doge.png",
+	"spriteWidth": 16,
+	"spriteHeight": 26,
+	"columns": 6,
+	"rows": 11,
+	"durationType": "time",
+	"animations": [
+		{
+			"name": "IDLE",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 0,
+					"duration": 7
+				},
+				{
+					"index": 1,
+					"duration": 7
+				}
+				,
+				{
+					"index": 2,
+					"duration": 7
+				},
+				{
+					"index": 3,
+					"duration": 7
+				}
+				,
+				{
+					"index": 4,
+					"duration": 7
+				}
+				,
+				{
+					"index": 5,
+					"duration": 7
+				}
+			]
+		},
+		{
+			"name": "IDLE_LEFT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 6,
+					"duration": 7
+				},
+				{
+					"index": 7,
+					"duration": 7
+				}
+				,
+				{
+					"index": 8,
+					"duration": 7
+				},
+				{
+					"index": 9,
+					"duration": 7
+				}
+				,
+				{
+					"index": 10,
+					"duration": 7
+				}
+				,
+				{
+					"index": 11,
+					"duration": 7
+				}
+			]
+		},
+		{
+			"name": "RUNNING_RIGHT",
+			"repeat":true,
+			"frames": [
+				{
+					"index": 12,
+					"duration": 5
+				},
+				{
+					"index": 13,
+					"duration": 5
+				},
+				{
+					"index": 14,
+					"duration": 5
+				},
+				{
+					"index": 15,
+					"duration": 5
+				},
+				{
+					"index": 16,
+					"duration": 5
+				},
+				{
+					"index": 17,
+					"duration": 5
+				}
+			]
+		},
+		
+		{
+			"name": "RUNNING_LEFT",
+			"repeat":true,
+			"frames": [
+				{
+					"index": 18,
+					"duration": 3
+				},
+				{
+					"index": 19,
+					"duration": 3
+				},
+				{
+					"index": 20,
+					"duration": 5
+				},
+				{
+					"index": 21,
+					"duration": 3
+				},
+				{
+					"index": 22,
+					"duration": 3
+				},
+				{
+					"index": 23,
+					"duration": 3
+				}
+			]
+		},
+		{
+			"name": "ATTACKING_RIGHT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 24,
+					"duration": 1
+				},
+				{
+					"index": 25,
+					"duration": 1
+				},
+				{
+					"index": 26,
+					"duration": 1
+				},
+				{
+					"index": 27,
+					"duration": 1
+				},
+				{
+					"index": 28,
+					"duration": 1
+				},
+				{
+					"index": 29,
+					"duration": 1
+				}
+			]
+		},
+		{
+			"name": "ATTACKING_LEFT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 30,
+					"duration": 5
+				},
+				{
+					"index": 31,
+					"duration": 3
+				},
+				{
+					"index": 32,
+					"duration": 3
+				},
+				{
+					"index": 33,
+					"duration": 3
+				},
+				{
+					"index": 34,
+					"duration": 3
+				},
+				{
+					"index": 35,
+					"duration": 3
+				}
+			]
+		},
+		{
+			"name": "TAKING_DAMAGE",
+			"frames": [
+				{
+					"index": 36,
+					"duration": 2
+				},
+				{
+					"index": 37,
+					"duration": 2
+				},
+				{
+					"index": 38,
+					"duration": 3
+				},
+				{
+					"index": 39,
+					"duration": 3
+				},
+				{
+					"index": 40,
+					"duration": 5
+				},
+				{
+					"index": 41,
+					"duration": 5
+				}
+			]
+		},
+		{
+			"name": "TAKING_DAMAGE_LEFT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 42,
+					"duration": 3
+				},
+				{
+					"index": 43,
+					"duration": 3
+				},
+				{
+					"index": 44,
+					"duration": 3
+				},
+				{
+					"index": 45,
+					"duration": 5
+				},
+				{
+					"index": 46,
+					"duration": 5
+				},
+				{
+					"index": 47,
+					"duration": 7
+				}
+			]
+		},
+		{
+			"name": "DYING",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 48,
+					"duration": 5
+				},
+				{
+					"index": 49,
+					"duration": 5
+				},
+				{
+					"index": 50,
+					"duration": 5
+				},
+				{
+					"index": 51,
+					"duration": 7
+				},
+				{
+					"index": 52,
+					"duration": 9
+				},
+				{
+					"index": 53,
+					"duration": 10
+				}
+			]
+		},
+		{
+			"name": "DYING_LEFT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 54,
+					"duration": 3
+				},
+				{
+					"index": 55,
+					"duration": 5
+				},
+				{
+					"index": 56,
+					"duration": 5
+				},
+				{
+					"index": 57,
+					"duration": 7
+				},
+				{
+					"index": 58,
+					"duration": 9
+				},
+				{
+					"index": 59,
+					"duration": 10
+				}
+			]
+		},
+		{
+			"name": "DEAD",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 60,
+					"duration": 150
+				}
+			]
+		},
+		{
+			"name": "DEAD_LEFT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 61,
+					"duration": 150
+				}
+			]
+		}
+	]
+}

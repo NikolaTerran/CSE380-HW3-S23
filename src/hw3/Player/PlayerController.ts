@@ -6,6 +6,11 @@ import Fall from "./PlayerStates/Fall";
 import Idle from "./PlayerStates/Idle";
 import Jump from "./PlayerStates/Jump";
 import Walk from "./PlayerStates/Walk";
+import Running_Left from "./PlayerStates/Running_Left";
+import Running_Right from "./PlayerStates/Running_Right";
+import Attacking_Left from "./PlayerStates/Attacking_Left";
+import Attacking_Right from "./PlayerStates/Attacking_Right";
+import Dying from "./PlayerStates/Dying";
 
 import PlayerWeapon from "./PlayerWeapon";
 import Input from "../../Wolfie2D/Input/Input";
@@ -15,6 +20,7 @@ import HW3AnimatedSprite from "../Nodes/HW3AnimatedSprite";
 import MathUtils from "../../Wolfie2D/Utils/MathUtils";
 import { HW3Events } from "../HW3Events";
 import Dead from "./PlayerStates/Dead";
+import Taking_Damage from "./PlayerStates/Taking_Damage";
 
 // TODO play your heros animations
 
@@ -24,7 +30,14 @@ import Dead from "./PlayerStates/Dead";
 export const PlayerAnimations = {
     IDLE: "IDLE",
     WALK: "WALK",
-    JUMP: "JUMP",
+    RUNNING_RIGHT: "RUNNING_RIGHT",
+    RUNNING_LEFT: "RUNNING_LEFT",
+    ATTACKING_LEFT: "ATTACKING_LEFT",
+    ATTACKING_RIGHT: "ATTACKING_RIGHT",
+    TAKING_DAMAGE: "TAKING_DAMAGE",
+    DYING: "DYING",
+    DEAD: "DEAD",
+    IDLE_LEFT: "IDLE_LEFT"
 } as const
 
 /**
@@ -40,10 +53,16 @@ export const PlayerTweens = {
  */
 export const PlayerStates = {
     IDLE: "IDLE",
+    JUMP: "JUMP",
     WALK: "WALK",
-	JUMP: "JUMP",
-    FALL: "FALL",
+    RUNNING_LEFT: "RUNNING_LEFT",
+    RUNNING_RIGHT: "RUNNING_RIGHT",
+    ATTACKING_LEFT: "ATTACKING_LEFT",
+    ATTACKING_RIGHT: "ATTACKING_RIGHT",
+    TAKING_DAMAGE: "TAKING_DAMAGE",
+    DYING: "DYING",
     DEAD: "DEAD",
+    FALL: "FALL"
 } as const
 
 /**
@@ -52,6 +71,8 @@ export const PlayerStates = {
 export default class PlayerController extends StateMachineAI {
     public readonly MAX_SPEED: number = 200;
     public readonly MIN_SPEED: number = 100;
+
+    
 
     /** Health and max health for the player */
     protected _health: number;
@@ -66,7 +87,6 @@ export default class PlayerController extends StateMachineAI {
     protected tilemap: OrthogonalTilemap;
     // protected cannon: Sprite;
     protected weapon: PlayerWeapon;
-
     
     public initializeAI(owner: HW3AnimatedSprite, options: Record<string, any>){
         this.owner = owner;
@@ -82,10 +102,16 @@ export default class PlayerController extends StateMachineAI {
 
         // Add the different states the player can be in to the PlayerController 
 		this.addState(PlayerStates.IDLE, new Idle(this, this.owner));
-		this.addState(PlayerStates.WALK, new Walk(this, this.owner));
+		// this.addState(PlayerStates.WALK, new Walk(this, this.owner));
         this.addState(PlayerStates.JUMP, new Jump(this, this.owner));
         this.addState(PlayerStates.FALL, new Fall(this, this.owner));
         this.addState(PlayerStates.DEAD, new Dead(this, this.owner));
+        this.addState(PlayerStates.RUNNING_LEFT, new Running_Left(this, this.owner));
+        this.addState(PlayerStates.RUNNING_RIGHT, new Running_Right(this, this.owner));
+        this.addState(PlayerStates.ATTACKING_LEFT, new Attacking_Left(this, this.owner));
+        this.addState(PlayerStates.ATTACKING_RIGHT, new Attacking_Right(this, this.owner));
+        this.addState(PlayerStates.DYING, new Dying(this, this.owner));
+        this.addState(PlayerStates.TAKING_DAMAGE, new Taking_Damage(this, this.owner));
         
         // Start the player in the Idle state
         this.initialize(PlayerStates.IDLE);
@@ -107,13 +133,12 @@ export default class PlayerController extends StateMachineAI {
 
     public update(deltaT: number): void {
 		super.update(deltaT);
-
-        // If the player hits the attack button and the weapon system isn't running, restart the system and fire!
-        if (Input.isPressed(HW3Controls.ATTACK) && !this.weapon.isSystemRunning()) {
+        // // If the player hits the attack button and the weapon system isn't running, restart the system and fire!
+        if (Input.isPressed(HW3Controls.ATTACK) && !this.weapon.isSystemRunning() && this._health > 0) {
             // Start the particle system at the player's current position
             this.weapon.startSystem(500, 0, this.owner.position);
+            // this.changeState(PlayerStates.ATTACKING_LEFT);
         }
-
 	}
 
     public get velocity(): Vec2 { return this._velocity; }
@@ -135,6 +160,10 @@ export default class PlayerController extends StateMachineAI {
         // When the health changes, fire an event up to the scene.
         this.emitter.fireEvent(HW3Events.HEALTH_CHANGE, {curhp: this.health, maxhp: this.maxHealth});
         // If the health hit 0, change the state of the player
-        if (this.health === 0) { this.changeState(PlayerStates.DEAD); }
+        // if (this.health <= 0) { 
+        //     this.changeState(PlayerStates.DYING); 
+        // }
     }
+
+    
 }
